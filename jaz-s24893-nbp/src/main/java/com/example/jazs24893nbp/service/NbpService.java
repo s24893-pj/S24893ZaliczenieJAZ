@@ -15,7 +15,7 @@ public class NbpService {
 
     private final RestTemplate restTemplate;
     private final NbpRepository nbpRepository;
-    private static final String nbpUrl = "http://api.nbp.pl/api/exchangerates/rates";
+    private static final String link = "http://api.nbp.pl/api/exchangerates/rates";
 
     public NbpService(RestTemplate restTemplate, NbpRepository nbpRepository) {
         this.restTemplate = restTemplate;
@@ -23,7 +23,7 @@ public class NbpService {
     }
 
     public NbpResponse getCurrencyRates(String table, String code, LocalDate startDate, LocalDate endDate) {
-        String url = String.format("%s/%s/%s/%s/%s", nbpUrl, table, code, startDate, endDate);
+        String url = String.format("%s/%s/%s/%s/%s", link, table, code, startDate, endDate);
         return restTemplate.getForObject(url, NbpResponse.class);
     }
     public double getAverageRate(List<NbpResponse.Rate> rates) {
